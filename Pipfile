@@ -6,8 +6,15 @@ name = "pypi"
 [packages]
 flask = "*"
 python-dotenv = "*"
+gunicorn = "*"
 
 [dev-packages]
 
 [requires]
 python_version = "3.9"
+
+[scripts]
+dev = "python main.py"
+start = "gunicorn -c config/gunicorn.py"
+watch = "watchmedo tricks-from tricks.yml"
+format = "black ."

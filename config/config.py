@@ -5,14 +5,20 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
+# required
 DEBUG_TYPE = os.environ["DEBUG_TYPE"]
 DEBUG = False
 if DEBUG_TYPE == "1":
     DEBUG = True
+PORT = os.environ["PORT"]
+SECRET_KEY = os.environ["SECRET_KEY"]
 
-# ===
+# not required
+SERVER_NAME = os.environ.get("SERVER_NAME")
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+TEMPLATES_DIR = os.path.join(BASE_DIR, "templates")
+STATIC_DIR = os.path.join(BASE_DIR, "assets")
 
 LOG_DIR = os.path.join(BASE_DIR, "log")
 LOG_FILE_PATH = os.path.join(LOG_DIR, "app.log")
@@ -50,11 +56,12 @@ LOGGING = {
     },
     "loggers": {
         "__main__": {
-            "level": "DEBUG",
+            "level": "INFO",
             "handlers": ["console", "file"],
             "propagate": False,
         },
-        "": {"level": "DEBUG", "handlers": ["console", "file"], "propagate": False},
+        "": {"level": "INFO", "handlers": ["console", "file"], "propagate": False},
     },
 }
 config.dictConfig(LOGGING)
+

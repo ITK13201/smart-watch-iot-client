@@ -9,3 +9,4 @@ __pycache__/
 # others
 *.env
 *.log
+*.pid
