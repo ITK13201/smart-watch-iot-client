@@ -1,0 +1,10 @@
+# editor / IED settings
+.idea/
+.vscode/
+
+# python
+.venv/
+
+# others
+*.env
+*.log
