@@ -64,4 +64,3 @@ LOGGING = {
     },
 }
 config.dictConfig(LOGGING)
-

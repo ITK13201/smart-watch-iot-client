@@ -1,7 +1,7 @@
 import os
 from config.config import PORT, LOGGING, BASE_DIR
 
-wsgi_app = 'infrastructure:Engine'
+wsgi_app = "infrastructure:Engine"
 bind = "127.0.0.1:{}".format(PORT)
 proc_name = "smart-watch-iot-client"
 workers = 1
