@@ -1,7 +1,6 @@
-from flask import Flask, Response
-
-import cmd
+import infrastructure
+from config.config import PORT, DEBUG
 
 
 if __name__ == "__main__":
-    cmd.Run()
+    infrastructure.Engine.run(port=PORT)

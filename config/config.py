@@ -1,22 +1,21 @@
 import os
 import pathlib
 from logging import config
-from dotenv import load_dotenv
 
-load_dotenv()
+
+# ==============================
+# Base Settings
+# ==============================
 
 # required
-DEBUG_TYPE = os.environ["DEBUG_TYPE"]
+DEBUG_TYPE = os.environ["FLASK_DEBUG"]
 DEBUG = False
 if DEBUG_TYPE == "1":
     DEBUG = True
 PORT = os.environ["PORT"]
-SECRET_KEY = os.environ["SECRET_KEY"]
-
-# not required
-SERVER_NAME = os.environ.get("SERVER_NAME")
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+FLASK_ENVIRONMENT_FILE_PATH = os.path.join(BASE_DIR, "config", "environment.py")
 TEMPLATES_DIR = os.path.join(BASE_DIR, "templates")
 STATIC_DIR = os.path.join(BASE_DIR, "assets")
 
@@ -64,3 +63,9 @@ LOGGING = {
     },
 }
 config.dictConfig(LOGGING)
+
+
+# ====================================
+# Individual Settings
+# ====================================
+YTM_AUTH_HEADERS_JSON_PATH = os.path.join(BASE_DIR, "ytm_auth_headers.json")

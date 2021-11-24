@@ -6,8 +6,13 @@
 .venv/
 __pycache__/
 
-# others
+
+#secrets
 *.env
-*.log
 *.pid
+config/ytm_auth_headers.json
+tools/ytm_auth_headers_row.txt
+
+# others
+*.log
 tmp/
