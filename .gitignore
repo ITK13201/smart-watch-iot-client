@@ -10,7 +10,7 @@ __pycache__/
 #secrets
 *.env
 *.pid
-config/ytm_auth_headers.json
+ytm_auth_headers.json
 tools/ytm_auth_headers_row.txt
 
 # others

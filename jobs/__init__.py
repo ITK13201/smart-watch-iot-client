@@ -1,6 +1,6 @@
 from flask.cli import AppGroup
 from jobs.fetch_ytmusic import fetch_ytmusic
 
-jobs = AppGroup("jobs")
+job = AppGroup("job")
 
-jobs.add_command(fetch_ytmusic)
+job.add_command(fetch_ytmusic)

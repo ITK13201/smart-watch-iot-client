@@ -8,6 +8,8 @@ flask = "*"
 gunicorn = "*"
 pychromecast = "*"
 ytmusicapi = "*"
+youtube-dl = "*"
+yt-dlp = "*"
 
 [dev-packages]
 black = "==21.11b1"
