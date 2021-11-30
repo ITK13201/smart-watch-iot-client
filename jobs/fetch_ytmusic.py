@@ -1,9 +1,9 @@
 import click
 from flask.cli import with_appcontext
 
-from processes.youtube_music import YTMusicManager
+from usecases import processes
 
-manager = YTMusicManager()
+manager = processes.YTMusicManager()
 
 
 @click.command("fetch_ytmusic", help="fetch youtube music")

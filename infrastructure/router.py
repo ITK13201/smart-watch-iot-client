@@ -1,20 +1,19 @@
 import json
+import logging
+import pprint
+
 from flask import Flask, Response
 from werkzeug.exceptions import NotFound, Forbidden, InternalServerError
 
 from jobs import job
-from config.config import TEMPLATES_DIR, STATIC_DIR, FLASK_ENVIRONMENT_FILE_PATH
+from config.config import TEMPLATES_DIR, STATIC_DIR, FLASK_ENVIRONMENT_FILE_PATH, STATIC_URL_PATH
 
-Engine = Flask(__name__, template_folder=TEMPLATES_DIR, static_folder=STATIC_DIR)
-
-ok = Engine.config.from_pyfile(filename=FLASK_ENVIRONMENT_FILE_PATH, silent=True)
-if not ok:
-    raise Exception("Error: failed to load flask configurations.")
+Engine = Flask(__name__, template_folder=TEMPLATES_DIR, static_folder=STATIC_DIR, static_url_path=STATIC_URL_PATH)
 
 # ================
 # Routing
 # ================
-@Engine.route("/")
+@Engine.route("/", methods=["GET"])
 def index() -> Response:
     return Response(response="test", status=200)
 
@@ -40,3 +39,12 @@ def internal_server_error(e: InternalServerError) -> Response:
 
 
 Engine.cli.add_command(job)
+
+# =============================
+# Manage Config
+# =============================
+ok = Engine.config.from_pyfile(filename=FLASK_ENVIRONMENT_FILE_PATH, silent=True)
+if not ok:
+    raise Exception("Error: failed to load flask configurations.")
+# logger = logging.getLogger(__name__)
+# logger.info(pprint.pformat(Engine.config))

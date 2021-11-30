@@ -21,7 +21,7 @@ argh = "*"
 python_version = "3.9"
 
 [scripts]
-dev = "flask run --port=$PORT"
+dev = "flask run --port=$PORT --host=0.0.0.0"
 start = "gunicorn -c config/gunicorn.py"
 watch = "watchmedo tricks-from tricks.yml"
 format = "black ."

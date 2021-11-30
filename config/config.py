@@ -8,11 +8,14 @@ from logging import config
 # ==============================
 
 # required
+import flask.logging
+
 DEBUG_TYPE = os.environ["FLASK_DEBUG"]
 DEBUG = False
 if DEBUG_TYPE == "1":
     DEBUG = True
 PORT = os.environ["PORT"]
+STATIC_URL_PATH = "/assets"
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 FLASK_ENVIRONMENT_FILE_PATH = os.path.join(BASE_DIR, "config", "environment.py")

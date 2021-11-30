@@ -16,3 +16,4 @@ tools/ytm_auth_headers_row.txt
 # others
 *.log
 tmp/
+assets/musics/

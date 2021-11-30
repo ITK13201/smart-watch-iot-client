@@ -3,4 +3,5 @@ from config.config import DEBUG
 
 TESTING = DEBUG
 SECRET_KEY = os.environ["SECRET_KEY"]
-SERVER_NAME = os.environ.get("SERVER_NAME")
+# これ入れるとルーティングにバグが出る
+# SERVER_NAME = os.environ.get("SERVER_NAME")
