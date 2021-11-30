@@ -6,9 +6,19 @@ from flask import Flask, Response
 from werkzeug.exceptions import NotFound, Forbidden, InternalServerError
 
 from jobs import job
-from config.config import TEMPLATES_DIR, STATIC_DIR, FLASK_ENVIRONMENT_FILE_PATH, STATIC_URL_PATH
+from config.config import (
+    TEMPLATES_DIR,
+    STATIC_DIR,
+    FLASK_ENVIRONMENT_FILE_PATH,
+    STATIC_URL_PATH,
+)
 
-Engine = Flask(__name__, template_folder=TEMPLATES_DIR, static_folder=STATIC_DIR, static_url_path=STATIC_URL_PATH)
+Engine = Flask(
+    __name__,
+    template_folder=TEMPLATES_DIR,
+    static_folder=STATIC_DIR,
+    static_url_path=STATIC_URL_PATH,
+)
 
 # ================
 # Routing

@@ -12,7 +12,7 @@ def play_music(music_file_path: str):
     port = PORT
 
     mp3url = "http://{}:{}/{}".format(ip, port, music_file_path)
-    mp3url = urllib.parse.quote(mp3url, safe=':/')
+    mp3url = urllib.parse.quote(mp3url, safe=":/")
 
     # Chromecastデバイス（Google Homeも）を探す
     chromecasts = pychromecast.get_chromecasts()

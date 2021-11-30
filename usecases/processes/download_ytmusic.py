@@ -12,7 +12,7 @@ def download_ytmusic(music_url: str, outdir: str = None):
         outdir = "assets/musics"
     file_template = "%(title)s-%(id)s.%(ext)s"
     output = os.path.join(BASE_DIR, outdir, file_template)
-    command = "yt-dlp -o \"{}\" \"{}\" -x --audio-format mp3".format(output, music_url)
+    command = 'yt-dlp -o "{}" "{}" -x --audio-format mp3'.format(output, music_url)
     status = subprocess.call(command, shell=True)
     if status != 0:
         logger.error("Failed to download music: {}".format(music_url))
