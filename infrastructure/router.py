@@ -18,6 +18,7 @@ if not ok:
 def index() -> Response:
     return Response(response="test", status=200)
 
+
 @Engine.route("/api/v1/test/")
 def api_test() -> Response:
     return Response(response=json.dumps({"message": "test"}), status=200)
@@ -37,5 +38,5 @@ def not_found(e: NotFound) -> Response:
 def internal_server_error(e: InternalServerError) -> Response:
     return e.get_response()
 
-Engine.cli.add_command(job)
 
+Engine.cli.add_command(job)
