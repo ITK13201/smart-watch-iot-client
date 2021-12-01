@@ -13,6 +13,7 @@ from config.config import (
     FLASK_ENVIRONMENT_FILE_PATH,
     STATIC_URL_PATH,
 )
+import views
 from views.jwt import authenticate, identity
 
 Engine = Flask(
@@ -46,6 +47,12 @@ def index() -> Response:
 @jwt_required()
 def api_v1_test() -> Response:
     return Response(response=json.dumps({"message": "test"}), status=200)
+
+
+@Engine.route("/api/v1/play_music", methods=["POST"])
+@jwt_required()
+def api_v1_play_music() -> Response:
+    return views.api.v1.play_music_view()
 
 
 @Engine.route("/protected")
