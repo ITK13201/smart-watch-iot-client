@@ -41,18 +41,21 @@ LOGGING = {
         "simple": {
             "format": "%(asctime)s %(name)s:%(lineno)s %(funcName)s [%(levelname)s]: %(message)s"
         },
+        "myformat": {
+            "format": "[%(levelname)s] %(asctime)s %(name)s:%(lineno)s %(funcName)s %(module)s %(process)d %(thread)d:  %(message)s"
+        },
     },
     "handlers": {
         "console": {
             "class": "logging.StreamHandler",
             "level": "INFO",
-            "formatter": "simple",
+            "formatter": "myformat",
             "stream": "ext://sys.stdout",
         },
         "file": {
             "class": "logging.FileHandler",
             "level": "INFO",
-            "formatter": "simple",
+            "formatter": "myformat",
             "filename": "log/app.log",
         },
     },
