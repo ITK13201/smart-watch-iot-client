@@ -10,6 +10,7 @@ pychromecast = "*"
 ytmusicapi = "*"
 youtube-dl = "*"
 yt-dlp = "*"
+flask-jwt = "*"
 
 [dev-packages]
 black = "==21.11b1"

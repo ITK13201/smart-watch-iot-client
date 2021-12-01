@@ -75,3 +75,5 @@ config.dictConfig(LOGGING)
 # Individual Settings
 # ====================================
 YTM_AUTH_HEADERS_JSON_PATH = os.path.join(BASE_DIR, "ytm_auth_headers.json")
+DEFAULT_USER_USERNAME = os.environ["DEFAULT_USER_USERNAME"]
+DEFAULT_USER_PASSWORD = os.environ["DEFAULT_USER_PASSWORD"]

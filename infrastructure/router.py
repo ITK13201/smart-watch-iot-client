@@ -4,6 +4,7 @@ import pprint
 
 from flask import Flask, Response
 from werkzeug.exceptions import NotFound, Forbidden, InternalServerError
+from flask_jwt import JWT, jwt_required, current_identity
 
 from jobs import job
 from config.config import (
@@ -12,6 +13,7 @@ from config.config import (
     FLASK_ENVIRONMENT_FILE_PATH,
     STATIC_URL_PATH,
 )
+from views.jwt import authenticate, identity
 
 Engine = Flask(
     __name__,
@@ -20,16 +22,36 @@ Engine = Flask(
     static_url_path=STATIC_URL_PATH,
 )
 
+# =============================
+# Manage Config
+# =============================
+ok = Engine.config.from_pyfile(filename=FLASK_ENVIRONMENT_FILE_PATH, silent=True)
+if not ok:
+    raise Exception("Error: failed to load flask configurations.")
+# logger = logging.getLogger(__name__)
+# logger.info(pprint.pformat(Engine.config))
+
 # ================
 # Routing
 # ================
+jwt = JWT(app=Engine, authentication_handler=authenticate, identity_handler=identity)
+
+
 @Engine.route("/")
 def index() -> Response:
     return Response(response="ok", status=200)
 
-@Engine.route("/api/v1/test/")
+
+@Engine.route("/api/v1/test")
+@jwt_required()
 def api_v1_test() -> Response:
     return Response(response=json.dumps({"message": "test"}), status=200)
+
+
+@Engine.route("/protected")
+@jwt_required()
+def protected() -> Response:
+    return Response(response="%s" % current_identity, status=200)
 
 
 @Engine.errorhandler(403)
@@ -48,12 +70,3 @@ def internal_server_error(e: InternalServerError) -> Response:
 
 
 Engine.cli.add_command(job)
-
-# =============================
-# Manage Config
-# =============================
-ok = Engine.config.from_pyfile(filename=FLASK_ENVIRONMENT_FILE_PATH, silent=True)
-if not ok:
-    raise Exception("Error: failed to load flask configurations.")
-# logger = logging.getLogger(__name__)
-# logger.info(pprint.pformat(Engine.config))
