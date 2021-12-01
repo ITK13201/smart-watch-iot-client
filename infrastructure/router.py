@@ -23,13 +23,12 @@ Engine = Flask(
 # ================
 # Routing
 # ================
-@Engine.route("/", methods=["GET"])
+@Engine.route("/")
 def index() -> Response:
-    return Response(response="test", status=200)
-
+    return Response(response="ok", status=200)
 
 @Engine.route("/api/v1/test/")
-def api_test() -> Response:
+def api_v1_test() -> Response:
     return Response(response=json.dumps({"message": "test"}), status=200)
 
 
