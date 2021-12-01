@@ -7,7 +7,7 @@ from config.config import BASE_DIR
 logger = logging.getLogger(__name__)
 
 # example "https://music.youtube.com/watch?v=hoWrWoMCYdM&list=RDAMVM86_sM57P3U0"
-def download_ytmusic(music_url: str, outdir: str = None):
+def download_music(music_url: str, outdir: str = None) -> bool:
     if outdir is None:
         outdir = "assets/musics"
     file_template = "%(title)s-%(id)s.%(ext)s"
@@ -16,3 +16,5 @@ def download_ytmusic(music_url: str, outdir: str = None):
     status = subprocess.call(command, shell=True)
     if status != 0:
         logger.error("Failed to download music: {}".format(music_url))
+        return False
+    return True
