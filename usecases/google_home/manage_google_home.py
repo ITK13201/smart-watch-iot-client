@@ -5,7 +5,6 @@ import logging
 from typing import Union
 from pychromecast import Chromecast, CastBrowser, get_chromecasts
 import urllib.parse
-import traceback
 
 from config.config import PORT
 
@@ -23,6 +22,7 @@ class GoogleHomeManager:
         mp3_url = urllib.parse.quote(mp3_url, safe=":/")
 
         # Chromecastデバイス（Google Homeも）を探す
+        logger.info("Searching Google home...")
         chromecasts: Union[
             tuple[list[Chromecast], CastBrowser], CastBrowser
         ] = get_chromecasts()
@@ -34,7 +34,6 @@ class GoogleHomeManager:
         try:
             google_home = chromecasts[0][0]
         except IndexError:
-            traceback.print_exc()
             logger.error("Couldn't Search Google Home")
             return False
         else:
@@ -57,7 +56,7 @@ class GoogleHomeManager:
             controller.block_until_active(timeout=30)
 
         # play music
-        logger.info("Playing... : ", mp3_url)
+        logger.info("Playing... : {}".format(mp3_url))
         controller.play_media(mp3_url, "audio/mp3")
         google_home.media_controller.block_until_active()
         return True
