@@ -11,9 +11,8 @@ __pycache__/
 *.env
 *.pid
 ytm_auth_headers.json
-tools/ytm_auth_headers_row.txt
 
 # others
 *.log
 tmp/
-assets/musics/
+data/
