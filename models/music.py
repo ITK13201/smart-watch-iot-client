@@ -13,8 +13,17 @@ from infrastructure.apiclient import awsApiClient
 
 logger = logging.getLogger(__name__)
 
+
 class Music:
-    def __init__(self, mp3_path: str = None, wav_path: str = None, file_path: str = None, url: str = None, bpm: float = None, length: float = None):
+    def __init__(
+        self,
+        mp3_path: str = None,
+        wav_path: str = None,
+        file_path: str = None,
+        url: str = None,
+        bpm: float = None,
+        length: float = None,
+    ):
         self.mp3_path = mp3_path
         self.wav_path = wav_path
         self.file_path = file_path
@@ -60,7 +69,9 @@ class Music:
 
         y, sr = librosa.load(self.wav_path, offset=offset, duration=duration)
         onset_env = librosa.onset.onset_strength(y, sr=sr)
-        tempo: "np.ndarray[np.float64]" = librosa.beat.tempo(onset_envelope=onset_env, sr=sr)
+        tempo: "np.ndarray[np.float64]" = librosa.beat.tempo(
+            onset_envelope=onset_env, sr=sr
+        )
 
         return float(tempo[0])
 
@@ -88,7 +99,7 @@ class Music:
                 "file_path": self.file_path,
                 "url": self.url,
                 "bpm": self.bpm,
-                "length": self.length
+                "length": self.length,
             }
             response = awsApiClient.add_music(query)
             if response.status_code == 201:
@@ -105,7 +116,7 @@ class Music:
             "file_path": self.file_path,
             "url": self.url,
             "bpm": self.bpm,
-            "length": self.length
+            "length": self.length,
         }
 
     def __str__(self):

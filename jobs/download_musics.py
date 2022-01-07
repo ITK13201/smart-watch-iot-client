@@ -12,7 +12,9 @@ logger = logging.getLogger(__name__)
 def download_musics():
     logger.info("started")
 
-    ok = youtube_music.download_musics("https://music.youtube.com/playlist?list=PLqqUdbNCi_pLoPDAMMpwX5E8QYlg6xEko")
+    ok = youtube_music.download_musics(
+        "https://music.youtube.com/playlist?list=PLqqUdbNCi_pLoPDAMMpwX5E8QYlg6xEko"
+    )
     if not ok:
         logger.error("Failed to download music")
 

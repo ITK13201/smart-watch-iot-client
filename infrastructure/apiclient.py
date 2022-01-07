@@ -5,7 +5,11 @@ import requests
 from urllib.parse import urlencode
 from copy import deepcopy
 
-from config.config import AWS_API_SERVER_BASE_URL, AWS_API_USER_USERNAME, AWS_API_USER_PASSWORD
+from config.config import (
+    AWS_API_SERVER_BASE_URL,
+    AWS_API_USER_USERNAME,
+    AWS_API_USER_PASSWORD,
+)
 
 logger = logging.getLogger(__name__)
 

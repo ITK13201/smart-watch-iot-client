@@ -31,7 +31,9 @@ def register_music_informations():
         music = Music(mp3_path=mp3_path, wav_path=wav_path)
         ok = music.initial_music_model()
         if not ok:
-            logger.error("errors occurred during initial music model: {}".format(mp3_path))
+            logger.error(
+                "errors occurred during initial music model: {}".format(mp3_path)
+            )
             os.remove(wav_path)
             continue
 

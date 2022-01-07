@@ -14,7 +14,9 @@ def play_music():
     logger.info("started")
 
     manager = GoogleHomeManager()
-    ok = manager.play_music("data/musics/Relaxing Jazz Music - Background Chill Out  Music - Music For Relax,Study,Work-neV3EPgvZ3g.mp3")
+    ok = manager.play_music(
+        "data/musics/Relaxing Jazz Music - Background Chill Out  Music - Music For Relax,Study,Work-neV3EPgvZ3g.mp3"
+    )
     if not ok:
         logger.error("Failed to play youtube music with google home")
 
