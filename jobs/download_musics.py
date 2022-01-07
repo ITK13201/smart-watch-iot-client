@@ -7,12 +7,12 @@ from usecases import youtube_music
 logger = logging.getLogger(__name__)
 
 
-@click.command("download_music", help="download youtube music")
+@click.command("download_musics", help="download youtube musics")
 @with_appcontext
-def download_music():
+def download_musics():
     logger.info("started")
 
-    ok = youtube_music.download_music("https://music.youtube.com/watch?v=kcAYxSHzle0")
+    ok = youtube_music.download_musics("https://music.youtube.com/watch?v=BjuNUDV7PO4&list=RDAMVMBjuNUDV7PO4")
     if not ok:
         logger.error("Failed to download music")
 

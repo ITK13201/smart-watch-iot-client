@@ -11,6 +11,12 @@ ytmusicapi = "*"
 youtube-dl = "*"
 yt-dlp = "*"
 flask-jwt = "*"
+numpy = "*"
+librosa = "*"
+matplotlib = "*"
+pydub = "*"
+glob2 = "*"
+mutagen = "*"
 
 [dev-packages]
 black = "==21.11b1"

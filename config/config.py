@@ -15,12 +15,12 @@ DEBUG = False
 if DEBUG_TYPE == "1":
     DEBUG = True
 PORT = os.environ["PORT"]
-STATIC_URL_PATH = "/assets"
+STATIC_URL_PATH = "/data"
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 FLASK_ENVIRONMENT_FILE_PATH = os.path.join(BASE_DIR, "config", "environment.py")
 TEMPLATES_DIR = os.path.join(BASE_DIR, "templates")
-STATIC_DIR = os.path.join(BASE_DIR, "assets")
+STATIC_DIR = os.path.join(BASE_DIR, "data")
 
 LOG_DIR = os.path.join(BASE_DIR, "log")
 LOG_FILE_PATH = os.path.join(LOG_DIR, "app.log")
@@ -80,3 +80,5 @@ DEFAULT_USER_PASSWORD = os.environ["DEFAULT_USER_PASSWORD"]
 DATA_DIR = os.environ.get("DATA_DIR")
 if DATA_DIR is None:
     DATA_DIR = os.path.join(BASE_DIR, "data")
+
+MUSIC_DIR = os.path.join(DATA_DIR, "musics")
