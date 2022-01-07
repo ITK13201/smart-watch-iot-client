@@ -82,3 +82,8 @@ if DATA_DIR is None:
     DATA_DIR = os.path.join(BASE_DIR, "data")
 
 MUSIC_DIR = os.path.join(DATA_DIR, "musics")
+
+# AWS API settings
+AWS_API_USER_USERNAME = os.environ["AWS_API_USER_USERNAME"]
+AWS_API_USER_PASSWORD = os.environ["AWS_API_USER_PASSWORD"]
+AWS_API_SERVER_BASE_URL = os.environ["AWS_API_SERVER_BASE_URL"]

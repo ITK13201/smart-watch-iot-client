@@ -9,7 +9,7 @@ import librosa
 from mutagen.mp3 import MP3
 
 from config.config import DATA_DIR, STATIC_URL_PATH
-
+from infrastructure.apiclient import awsApiClient
 
 logger = logging.getLogger(__name__)
 
@@ -28,15 +28,21 @@ class Music:
             return
         self.file_path = self._get_file_path()
         self.url = self._get_url()
+        self.bpm = self._get_bpm()
+        self.length = self._get_length()
 
         return self.is_valid()
 
     def _get_file_path(self) -> str:
+        logger.info("getting file path...: {}".format(self.mp3_path))
+
         abs_path = pathlib.Path(self.mp3_path)
         rel_path = abs_path.relative_to(DATA_DIR)
         return str(rel_path)
 
     def _get_url(self) -> Optional[str]:
+        logger.info("getting url...: {}".format(self.mp3_path))
+
         if self.file_path == None:
             logger.error("required file_path to get url")
             return None
@@ -45,13 +51,22 @@ class Music:
         return encoded_url
 
     def _get_bpm(self) -> float:
-        y, sr = librosa.load(self.wav_path)
+        logger.info("getting BPM...: {}".format(self.mp3_path))
+
+        # 切り出す区間
+        duration = 30.0
+        # 切り出し開始時間
+        offset = 50.0
+
+        y, sr = librosa.load(self.wav_path, offset=offset, duration=duration)
         onset_env = librosa.onset.onset_strength(y, sr=sr)
         tempo: "np.ndarray[np.float64]" = librosa.beat.tempo(onset_envelope=onset_env, sr=sr)
 
         return float(tempo[0])
 
     def _get_length(self) -> float:
+        logger.info("getting length...: {}".format(self.mp3_path))
+
         audio = MP3(self.mp3_path)
         return audio.info.length
 
@@ -66,3 +81,32 @@ class Music:
             return False
 
         return True
+
+    def push_aws(self):
+        if self.is_valid():
+            query = {
+                "file_path": self.file_path,
+                "url": self.url,
+                "bpm": self.bpm,
+                "length": self.length
+            }
+            response = awsApiClient.add_music(query)
+            if response.status_code == 201:
+                logger.info("Successfully add music: {}".format(query))
+            else:
+                logger.error("Failed to add music: {}".format(query))
+        else:
+            logger.error("not enough variables to push aws: {}".format(self.mp3_path))
+
+    def __dict__(self):
+        return {
+            "mp3_path": self.mp3_path,
+            "wav_path": self.wav_path,
+            "file_path": self.file_path,
+            "url": self.url,
+            "bpm": self.bpm,
+            "length": self.length
+        }
+
+    def __str__(self):
+        return str(self.__dict__())

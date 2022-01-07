@@ -26,19 +26,18 @@ def register_music_informations():
         wav_path = file_path_without_ext + ".wav"
 
         # create mav from mp3
-        mp3_to_wav()
+        mp3_to_wav(mp3_path, wav_path)
 
         music = Music(mp3_path=mp3_path, wav_path=wav_path)
         ok = music.initial_music_model()
         if not ok:
             logger.error("errors occurred during initial music model: {}".format(mp3_path))
+            os.remove(wav_path)
             continue
 
+        os.remove(wav_path)
 
-
-
-
-
-    print(MUSIC_DIR)
+        # register this music model to aws server
+        music.push_aws()
 
     logger.info("finished")

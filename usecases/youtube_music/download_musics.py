@@ -6,8 +6,7 @@ from config.config import MUSIC_DIR
 
 logger = logging.getLogger(__name__)
 
-MUSIC_DIR = "musics"
-MUSIC_FILE_TEMPLATE = "%(title)s-%(id)s.%(ext)s"
+MUSIC_FILE_TEMPLATE = "%(title)s@%(id)s.%(ext)s"
 
 
 # example "https://music.youtube.com/watch?v=hoWrWoMCYdM&list=RDAMVM86_sM57P3U0"
