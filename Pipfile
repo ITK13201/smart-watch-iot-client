@@ -17,6 +17,7 @@ matplotlib = "*"
 pydub = "*"
 glob2 = "*"
 mutagen = "*"
+python-dotenv = "*"
 
 [dev-packages]
 black = "==21.11b1"
