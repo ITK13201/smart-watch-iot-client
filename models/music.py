@@ -55,7 +55,10 @@ class Music:
         if self.file_path == None:
             logger.error("required file_path to get url")
             return None
-        raw_url = os.path.join(STATIC_URL_PATH, self.file_path)
+        static_url_path = STATIC_URL_PATH
+        if static_url_path.startswith("/"):
+            static_url_path = static_url_path[1:]
+        raw_url = os.path.join(static_url_path, self.file_path)
         encoded_url = urllib.parse.quote(raw_url, safe=":/")
         return encoded_url
 
