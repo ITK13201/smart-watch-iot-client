@@ -55,6 +55,18 @@ def api_v1_play_music() -> Response:
     return views.api.v1.play_music_view()
 
 
+@Engine.route("/api/v1/start_system", methods=["POST"])
+@jwt_required()
+def api_v1_start_system() -> Response:
+    return views.api.v1.start_system_view()
+
+
+@Engine.route("/api/v1/stop_system", methods=["POST"])
+@jwt_required()
+def api_v1_stop_system() -> Response:
+    return views.api.v1.stop_system_view()
+
+
 @Engine.route("/protected")
 @jwt_required()
 def protected() -> Response:

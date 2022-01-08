@@ -84,6 +84,11 @@ class Music:
         audio = MP3(self.mp3_path)
         return audio.info.length
 
+    def get_music_name(self) -> str:
+        blocks = self.file_path.split("@")
+        music_name = "".join(blocks[:-2])
+        return music_name
+
     def is_valid(self) -> bool:
         if self.file_path == None:
             return False

@@ -19,7 +19,6 @@ class GoogleHomeManager:
 
     def play_music(self, music_file_path: str) -> bool:
         mp3_url = "http://{}:{}/{}".format(self.ip, self.port, music_file_path)
-        mp3_url = urllib.parse.quote(mp3_url, safe=":/")
 
         # Chromecastデバイス（Google Homeも）を探す
         logger.info("Searching Google home...")
