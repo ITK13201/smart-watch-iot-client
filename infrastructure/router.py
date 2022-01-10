@@ -2,7 +2,7 @@ import json
 import logging
 import pprint
 
-from flask import Flask, Response
+from flask import Flask, Response, request
 from werkzeug.exceptions import NotFound, Forbidden, InternalServerError
 from flask_jwt import JWT, jwt_required, current_identity
 
@@ -58,7 +58,8 @@ def api_v1_play_music() -> Response:
 @Engine.route("/api/v1/start_system", methods=["POST"])
 @jwt_required()
 def api_v1_start_system() -> Response:
-    return views.api.v1.start_system_view()
+    payload = request.json
+    return views.api.v1.start_system_view(payload)
 
 
 @Engine.route("/api/v1/stop_system", methods=["POST"])

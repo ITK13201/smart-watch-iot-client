@@ -14,6 +14,10 @@ from config.config import BASE_DIR
 logger = logging.getLogger(__name__)
 
 THREAD_PATH = os.path.join(BASE_DIR, "thread.txt")
+RUN_TYPE = [
+    "out",
+    "in"
+]
 
 def is_active():
     return os.path.isfile(THREAD_PATH)
@@ -29,7 +33,7 @@ def deactivate():
     os.remove(THREAD_PATH)
     logger.info("deactivated system.")
 
-def run_system():
+def run_system_type_in():
     is_first_time = True
     while is_first_time or is_active():
         is_first_time = False
@@ -52,6 +56,26 @@ def run_system():
 
         # log info
         logger.info("playing... : {}".format(music.get_music_name()))
+
+        # send music info to discord
+        send_music_info(music)
+
+        # sleep in music length
+        time.sleep(music.length)
+
+def run_system_type_out():
+    is_first_time = True
+    while is_first_time or is_active():
+        is_first_time = False
+
+        response = awsApiClient.fetch_music()
+        data: dict = json.loads(response.text)
+        music = Music(
+            file_path=data["file_path"],
+            url=data["url"],
+            bpm=data["bpm"],
+            length=data["length"]
+        )
 
         # send music info to discord
         send_music_info(music)
