@@ -34,7 +34,7 @@ class Music:
     def initial_music_model(self) -> bool:
         if self.mp3_path == None or self.wav_path == None:
             logger.error("required mp3_path and wav_path to initial music model")
-            return
+            return False
         self.file_path = self._get_file_path()
         self.url = self._get_url()
         self.bpm = self._get_bpm()
