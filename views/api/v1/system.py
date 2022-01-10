@@ -54,3 +54,11 @@ def run_system():
 
         # sleep in music length
         time.sleep(music.length)
+
+
+def pause_system():
+    manager = GoogleHomeManager()
+    ok = manager.stop_music()
+    if not ok:
+        logger.error("Failed to stop youtube music with google home")
+

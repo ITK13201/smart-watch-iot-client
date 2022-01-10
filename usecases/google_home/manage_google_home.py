@@ -2,9 +2,8 @@ import pprint
 import time
 import socket
 import logging
-from typing import Union
+from typing import Union, Optional
 from pychromecast import Chromecast, CastBrowser, get_chromecasts
-import urllib.parse
 
 from config.config import PORT
 
@@ -17,9 +16,7 @@ class GoogleHomeManager:
         self.ip = socket.gethostbyname(self.host)
         self.port = PORT
 
-    def play_music(self, music_file_path: str) -> bool:
-        mp3_url = "http://{}:{}/{}".format(self.ip, self.port, music_file_path)
-
+    def find_google_home(self) -> Optional[Chromecast]:
         # Chromecastデバイス（Google Homeも）を探す
         logger.info("Searching Google home...")
         chromecasts: Union[
@@ -28,16 +25,25 @@ class GoogleHomeManager:
 
         if len(chromecasts) == 0:
             logger.error("Google Home Not Found")
-            return False
+            return None
 
         try:
             google_home = chromecasts[0][0]
         except IndexError:
             logger.error("Couldn't Search Google Home")
-            return False
+            return None
         else:
             logger.info("Found Google Home")
             logger.info(pprint.pformat(google_home))
+
+        return google_home
+
+    def play_music(self, music_file_path: str) -> bool:
+        mp3_url = "http://{}:{}/{}".format(self.ip, self.port, music_file_path)
+
+        google_home = self.find_google_home()
+        if google_home is None:
+            return False
 
         # kill running app of google home
         if not google_home.is_idle:
@@ -58,4 +64,19 @@ class GoogleHomeManager:
         logger.info("Playing... : {}".format(mp3_url))
         controller.play_media(mp3_url, "audio/mp3")
         google_home.media_controller.block_until_active()
+        return True
+
+    def stop_music(self) -> bool:
+        google_home = self.find_google_home()
+        if google_home is None:
+            return False
+
+        google_home.wait()
+        google_home.quit_app()
+
+        # controller = google_home.media_controller
+        # controller.stop()
+        # controller.block_until_active(timeout=30)
+
+        logger.info("Music stopped. with google home")
         return True

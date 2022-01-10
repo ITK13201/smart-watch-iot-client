@@ -1,6 +1,6 @@
 import json
 import logging
-from .system import deactivate, is_active
+from .system import deactivate, is_active, pause_system
 
 from flask import Response
 
@@ -14,5 +14,6 @@ def stop_system_view() -> Response:
     else:
         context = {"message": "Stopped system"}
         deactivate()
+        pause_system()
         status = 200
     return Response(response=json.dumps(context), status=status)
