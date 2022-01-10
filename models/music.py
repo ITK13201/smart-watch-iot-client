@@ -85,8 +85,9 @@ class Music:
         return audio.info.length
 
     def get_music_name(self) -> str:
-        blocks = self.file_path.split("@")
-        music_name = "".join(blocks[:-2])
+        file_name = os.path.basename(self.file_path)
+        blocks = file_name.split("@")
+        music_name = "".join(blocks[:-1])
         return music_name
 
     def is_valid(self) -> bool:

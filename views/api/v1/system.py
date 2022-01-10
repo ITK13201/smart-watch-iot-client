@@ -8,6 +8,7 @@ import threading
 from infrastructure.apiclient import awsApiClient
 from models.music import Music
 from usecases.google_home import GoogleHomeManager
+from usecases.discord.bot import send_music_info
 from config.config import BASE_DIR
 
 logger = logging.getLogger(__name__)
@@ -51,6 +52,9 @@ def run_system():
 
         # log info
         logger.info("playing... : {}".format(music.get_music_name()))
+
+        # send music info to discord
+        send_music_info(music)
 
         # sleep in music length
         time.sleep(music.length)
