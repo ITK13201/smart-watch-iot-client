@@ -16,10 +16,11 @@ def play_music():
     logger.info("started")
 
     manager = GoogleHomeManager()
-    mp3_url = urllib.parse.quote("data/musics/Dinner Time Jazz _ Smooth Instrumental Jazz Music for Dinner _ Background Jazz Playlist 2018 Hi-Fi@LrgCwdT2kx8.mp3", safe=":/")
-    ok = manager.play_music(
-        mp3_url
+    mp3_url = urllib.parse.quote(
+        "data/musics/Dinner Time Jazz _ Smooth Instrumental Jazz Music for Dinner _ Background Jazz Playlist 2018 Hi-Fi@LrgCwdT2kx8.mp3",
+        safe=":/",
     )
+    ok = manager.play_music(mp3_url)
     if not ok:
         logger.error("Failed to play youtube music with google home")
 

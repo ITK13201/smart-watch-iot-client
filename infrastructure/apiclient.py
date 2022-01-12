@@ -43,14 +43,12 @@ class AWSApiClient:
             headers.update(extra)
         return headers
 
-
     def fetch_music(self) -> requests.Response:
         url = self._create_url("api/v1/musics")
         headers = self._create_headers()
         response = requests.get(url=url, headers=headers)
         logger.info(response.text)
         return response
-
 
     def add_music(self, query: dict) -> requests.Response:
         url = self._create_url("api/v1/musics")

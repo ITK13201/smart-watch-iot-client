@@ -14,13 +14,12 @@ from config.config import BASE_DIR
 logger = logging.getLogger(__name__)
 
 THREAD_PATH = os.path.join(BASE_DIR, "thread.txt")
-RUN_TYPE = [
-    "out",
-    "in"
-]
+RUN_TYPE = ["out", "in"]
+
 
 def is_active():
     return os.path.isfile(THREAD_PATH)
+
 
 def activate(thread: threading.Thread):
     threadfile = pathlib.Path(THREAD_PATH)
@@ -29,9 +28,11 @@ def activate(thread: threading.Thread):
         f.write(str(thread.ident))
     logger.info("activated system.")
 
+
 def deactivate():
     os.remove(THREAD_PATH)
     logger.info("deactivated system.")
+
 
 def run_system_type_in():
     is_first_time = True
@@ -44,13 +45,11 @@ def run_system_type_in():
             file_path=data["file_path"],
             url=data["url"],
             bpm=data["bpm"],
-            length=data["length"]
+            length=data["length"],
         )
 
         manager = GoogleHomeManager()
-        ok = manager.play_music(
-            music.url
-        )
+        ok = manager.play_music(music.url)
         if not ok:
             logger.error("Failed to play youtube music with google home")
 
@@ -63,6 +62,7 @@ def run_system_type_in():
         # sleep in music length
         time.sleep(music.length)
 
+
 def run_system_type_out():
     is_first_time = True
     while is_first_time or is_active():
@@ -74,7 +74,7 @@ def run_system_type_out():
             file_path=data["file_path"],
             url=data["url"],
             bpm=data["bpm"],
-            length=data["length"]
+            length=data["length"],
         )
 
         # send music info to discord
@@ -89,4 +89,3 @@ def pause_system():
     ok = manager.stop_music()
     if not ok:
         logger.error("Failed to stop youtube music with google home")
-

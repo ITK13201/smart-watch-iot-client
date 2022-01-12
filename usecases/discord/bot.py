@@ -24,9 +24,7 @@ def send_music_info(music: Music):
         "color": COLOR,
     }
 
-    context = {
-        "embed": embed
-    }
+    context = {"embed": embed}
 
     headers = {
         "Authorization": "Bot {}".format(DISCORD_BOT_TOKEN),
@@ -38,6 +36,7 @@ def send_music_info(music: Music):
         logger.info("[*] {}\n{}".format(response.status_code, response.text))
     else:
         logger.info("[!] {}\n{}".format(response.status_code, response.text))
+
 
 def send_starting_message(type: str):
     AUTHOR_NAME = "STARTING MESSAGE"
@@ -57,9 +56,7 @@ def send_starting_message(type: str):
         "color": COLOR,
     }
 
-    context = {
-        "embed": embed
-    }
+    context = {"embed": embed}
 
     headers = {
         "Authorization": "Bot {}".format(DISCORD_BOT_TOKEN),

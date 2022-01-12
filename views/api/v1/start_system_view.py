@@ -2,7 +2,13 @@ import json
 import logging
 import threading
 
-from .system import activate, run_system_type_in, run_system_type_out, is_active, RUN_TYPE
+from .system import (
+    activate,
+    run_system_type_in,
+    run_system_type_out,
+    is_active,
+    RUN_TYPE,
+)
 from usecases.discord.bot import send_starting_message
 
 from flask import Response
