@@ -20,7 +20,7 @@ def send_music_info(music: Music):
             "name": AUTHOR_NAME,
         },
         "title": music.get_music_name(),
-        "description": "BPM: {}".format(music.bpm),
+        "description": "BPM: {}\nLENGTH: {}[sec]".format(music.bpm, music.length),
         "color": COLOR,
     }
 
