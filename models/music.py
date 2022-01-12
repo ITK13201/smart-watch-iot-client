@@ -87,7 +87,10 @@ class Music:
     def get_music_name(self) -> str:
         file_name = os.path.basename(self.file_path)
         blocks = file_name.split("@")
-        music_name = "".join(blocks[:-1])
+        if len(blocks) == 1:
+            music_name = blocks[0]
+        else:
+            music_name = "".join(blocks[:-1])
         return music_name
 
     def is_valid(self) -> bool:
