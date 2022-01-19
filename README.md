@@ -1,5 +1,16 @@
 # Smart Watch IoT Client
 
+This is an application that acquires your heart rate with a smartwatch, and recommends and plays back the appropriate BPM according to your heart rate.
+
+The colored servers in the figure below are constructed.
+The URLs of each repository are as follows.
+
+- AWS server (https://github.com/ITK13201/smart-watch-iot-server)
+- **(This repository) Raspberry Pi IoT Server** (https://github.com/ITK13201/smart-watch-iot-client)
+- Raspberry Pi Discord Server (https://github.com/ITK13201/smart-watch-iot-interactive-server)
+
+![system_chart](./docs/img/system_chart.png)
+
 ## Setup
 
 ### 1. Install
