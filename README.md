@@ -1,11 +1,28 @@
 # Smart Watch IoT Client
 
-## Install
+## Setup
+
+### 1. Install
 
 ```shell
 pip install pipenv
 pipenv install --dev
 ```
+
+### 2. Create .env file from .env.example
+
+1. copy .env.example to .env
+
+```shell
+cp ./.env.example ./.env
+```
+
+2. edit .env
+
+
+### 3. (Optional) Create json file of ytmusicapi authorization
+
+Refer to [the official documentation of ytmusicapi](https://ytmusicapi.readthedocs.io/en/latest/setup.html) and create an authentication file (`ytm_auth_headers.json`) for it.
 
 ## Usage
 
@@ -40,11 +57,25 @@ pipenv run format
 ### Download musics from YouTube Music
 
 ```shell
-flask job download_musics --url <YouTube Music URL>
+pipenv run flask job download_musics --url <YouTube Music URL>
 ```
 
 ### register music informations to [AWS Server](https://github.com/ITK13201/smart-watch-iot-server)
 
 ```shell
-flask job register_music_informations
+pipenv run flask job register_music_informations
+```
+
+## Test Usage
+
+### Search musics from YouTube Music
+
+```shell
+pipenv run flask job search_music_by_name --name <Music Title>
+```
+
+### Play music from music path
+
+```shell
+pipenv run flask job play_music --path <Music Path>
 ```

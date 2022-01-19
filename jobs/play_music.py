@@ -11,13 +11,14 @@ logger = logging.getLogger(__name__)
 
 
 @click.command("play_music", help="play music")
+@click.option("--path", type=click.STRING, help="Music Path.")
 @with_appcontext
-def play_music():
+def play_music(path: str):
     logger.info("started")
 
     manager = GoogleHomeManager()
     mp3_url = urllib.parse.quote(
-        "data/musics/Dinner Time Jazz _ Smooth Instrumental Jazz Music for Dinner _ Background Jazz Playlist 2018 Hi-Fi@LrgCwdT2kx8.mp3",
+        path,
         safe=":/",
     )
     ok = manager.play_music(mp3_url)
